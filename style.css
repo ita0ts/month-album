@@ -51,3 +51,10 @@ body {
     font-size: 0.9em;
     text-align: center;
 }
+
+#content{
+    min-width: 1765px;
+}
+.content-box{
+    transform: scale(0.7);
+}

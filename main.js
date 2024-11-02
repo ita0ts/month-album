@@ -1,3 +1,13 @@
+document.addEventListener("DOMContentLoaded", function () {
+  const h1Element = document.getElementById('myTopAlbums');
+  const yearSelect = document.getElementById("yearSelect");
+
+  yearSelect.addEventListener('change', function () {
+    h1Element.textContent = 'My Top Albums ' + (yearSelect.value);
+  });
+  h1Element.textContent = 'My Top Albums ' + (yearSelect.value);
+});
+
 function submitToImage() {
   const key = 'e97ca135be347c4a86d57a2fe313f59e';
   const user = document.getElementById("lastfmuser").value;
@@ -19,10 +29,10 @@ function submitToImage() {
       }
 
       const data = await response.json();
-      return data.album.image[3]?.['#text'] || 'URL_DA_IMAGEM_PADRÃO'; // Replace with a valid default image URL
+      return data.album.image[3]?.['#text'] || 'URL_DA_IMAGEM_PADRÃO';
     } catch (error) {
       console.error('Erro ao buscar imagem do álbum:', error);
-      return 'URL_DA_IMAGEM_PADRÃO'; // Replace with a valid default image URL
+      return 'URL_DA_IMAGEM_PADRÃO'; 
     }
   }
 
@@ -81,7 +91,7 @@ function submitToImage() {
 
 function saveAsImage() {
   const content = document.getElementById('content'); // Get the element to capture
-  html2canvas(content,{
+  html2canvas(content, {
     allowTaint: true,
     useCORS: true
 
@@ -94,7 +104,7 @@ function saveAsImage() {
     const conteudo = document.querySelector('a[download="top_albums_2024.png"]');
 
     localStorage.setItem('conteudoDiv', conteudo);
-    window.location.href = 'download.html'; 
+    window.location.href = 'download.html';
 
   }).catch(error => {
     console.error('Error capturing image:', error);
