@@ -1,11 +1,31 @@
+function resetDisplayTopAlbums() {
+
+  for (let i = 0; i <= 11; i++) {
+    const monthBox = document.querySelector(`.month-box[data-month="${i + 1}"]`);
+    const months = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+    const displayMonth = months[i];
+    // console.log(i + ' - ' + displayMonth);
+    if (monthBox) {
+      monthBox.innerHTML = `
+<span>${displayMonth}</span>
+    `;
+    }
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const h1Element = document.getElementById('myTopAlbums');
   const yearSelect = document.getElementById("yearSelect");
 
   yearSelect.addEventListener('change', function () {
     h1Element.textContent = 'My Top Albums ' + (yearSelect.value);
+    resetDisplayTopAlbums();
   });
   h1Element.textContent = 'My Top Albums ' + (yearSelect.value);
+
 });
 
 function submitToImage() {
@@ -32,10 +52,9 @@ function submitToImage() {
       return data.album.image[3]?.['#text'] || 'URL_DA_IMAGEM_PADRÃO';
     } catch (error) {
       console.error('Erro ao buscar imagem do álbum:', error);
-      return 'URL_DA_IMAGEM_PADRÃO'; 
+      return 'URL_DA_IMAGEM_PADRÃO';
     }
   }
-
   async function fetchMonthlyTopAlbum(year, month) {
     const from = new Date(year, month - 1, 1).getTime() / 1000;
     const to = new Date(year, month, 0).getTime() / 1000;
@@ -63,7 +82,6 @@ function submitToImage() {
       console.error('Erro ao acessar a API:', error);
     }
   }
-
   async function getTopAlbumsOfYear(year) {
     for (let month = 1; month <= 12; month++) {
       await fetchMonthlyTopAlbum(year, month);
@@ -85,7 +103,6 @@ function submitToImage() {
       }
     });
   }
-
   getTopAlbumsOfYear(selectedYear);
 }
 
