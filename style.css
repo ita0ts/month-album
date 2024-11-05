@@ -55,8 +55,3 @@ body {
 #content{
     min-width: 1765px;
 }
-.content-box{
-    display: flex;
-    justify-content: center;
-    transform: scale(0.6);
-}
