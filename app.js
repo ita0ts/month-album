@@ -1,22 +1,38 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     const h1Element = document.getElementById('myTopAlbums');
+    const selectedYear = localStorage.getItem("selectedYear");
 
-    const lastFmUser = localStorage.getItem("lastFmUser");
-    const selectedYear = localStorage.getItem("year");
+
+
 
 
     h1Element.textContent = 'My Top Albums ' + selectedYear;
 
-    document.getElementById("seeTopAlbums").addEventListener("click", submitToImage);
+    async function tentarAteFuncionar() {
+    const seeTopAlbums = localStorage.getItem('seeTopAlbums');
 
+        console.log(seeTopAlbums);
+        while (seeTopAlbums) {
+            try {
+                submitToImage();
+                seeTopAlbums = true;
+            } catch (error) {
+                console.error("porra", error.message);
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+        }
+    }
+    console.log(seeTopAlbums);
+    
+    tentarAteFuncionar();
+    
     async function submitToImage() {
         const key = 'e97ca135be347c4a86d57a2fe313f59e';
+        const lastFmUser = localStorage.getItem("lastFmUser");
         const user = lastFmUser;
-        if (!user) {
-            alert("Por favor, insira um usuário Last.fm.");
-            return;
-        }
+     
+
 
         let topAlbumsByMonth = [];
 
@@ -79,29 +95,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 progressText.textContent = `Carregando: ${progressPercentage}%`;
                 localStorage.setItem("progressPercentage", progressPercentage);
             }
-
-            if (progressText.textContent === `Carregando: ${progressPercentage}%`) {
-                const Timeout = true;
-                localStorage.setItem("Timeout", Timeout);
-                console.log('aaaaaaaaaaaa');
-            } else {
-                localStorage.removeItem("selectedYear"); 
-
-                localStorage.removeItem("lastFmUser");
-                localStorage.removeItem("selectedYear");
-            
-            }
-
-
-
-
             displayTopAlbums();
 
             progressBar.style.display = "none";
             progressText.textContent = "Carregamento concluído!";
 
             saveAsImage();
-
 
         }
 
@@ -119,11 +118,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         }
-
         getTopAlbumsOfYear(selectedYear);
-
     }
-
 
     function saveAsImage() {
 
@@ -138,9 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
             link.download = 'top_albums_2024.png';
             document.body.appendChild(link);
             const conteudo = document.querySelector('a[download="top_albums_2024.png"]');
-
             localStorage.setItem('conteudoDiv', conteudo);
-
 
         }).catch(error => {
             console.error('Error capturing image:', error);
