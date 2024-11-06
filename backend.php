@@ -1,3 +1,20 @@
+<?php
+// Verifica se os dados foram enviados via POST
+if (isset($_POST['lastfmuser']) && isset($_POST['year'])) {
+    $lastFmUser = $_POST['lastfmuser'];
+    $selectedYear = $_POST['year'];
+
+    // Processa os dados (Aqui você pode fazer algo com os dados, como consultar um banco ou API)
+    echo "Usuário LastFM: " . $lastFmUser . "<br>";
+    echo "Ano Selecionado: " . $selectedYear . "<br>";
+    echo "Dados recebidos e processados com sucesso!";
+} else {
+    echo "Erro: Dados não recebidos.";
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -34,6 +51,6 @@
         </div>
     </div>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
-    <script src="app.js"></script>
+    <script src="back.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Top Albums</title>
     <link rel="stylesheet" href="style.css">
-    <script src="main.js"></script>
+
 </head>
 
 <body>
@@ -17,7 +17,7 @@
     <div id="progressText"></div>
     <h1 id="myTopAlbums">My Top Albums</h1>
 
-    <div class="input-container">
+    <div class="input-container" id="formulario">
         <label for="lastfmuser">Usuário Last.fm:</label>
         <input type="text" id="lastfmuser" placeholder="Digite o usuário Last.fm">
 
@@ -26,6 +26,10 @@
 
         <button id="seeTopAlbums" onclick="navigateToPage2()">Ver Top Álbuns</button>
     </div>
+    
+
+    <script src="main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 
 </html>

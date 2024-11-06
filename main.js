@@ -61,3 +61,30 @@ function navigateToPage2() {
     localStorage.setItem("selectedYear", selectedYear);
     localStorage.setItem("seeTopAlbums", true);
 }
+
+$(document).ready(function(){
+    // Captura o envio do formulário
+    $("#seeTopAlbums").click(function(){
+
+        // Coleta os dados dos campos
+        const lastFmUser = document.getElementById("lastfmuser").value;
+        const selectedYear = document.getElementById("yearSelect").value;
+
+        // Envia os dados via AJAX
+        $.ajax({
+            url: "backend.php", // Arquivo PHP para processar os dados
+            type: "POST",
+            data: { 
+                lastfmuser: lastFmUser, 
+                year: selectedYear 
+            },
+            success: function(response) {
+                // Exibe a resposta do PHP
+                window.location.href = "download.html";  
+            },
+            error: function() {
+                alert("Erro ao enviar os dados.");
+            }
+        });
+    });
+});
