@@ -1,41 +1,32 @@
 <?php
-// Verifica se os dados foram enviados via POST
-if (isset($_POST['lastfmuser']) && isset($_POST['year'])) {
-    $lastFmUser = $_POST['lastfmuser'];
-    $selectedYear = $_POST['year'];
 
-    // Processa os dados (Aqui você pode fazer algo com os dados, como consultar um banco ou API)
-    echo "Usuário LastFM: " . $lastFmUser . "<br>";
-    echo "Ano Selecionado: " . $selectedYear . "<br>";
-    echo "Dados recebidos e processados com sucesso!";
-} else {
-    echo "Erro: Dados não recebidos.";
-}
+    // Recebe os dados enviados pelo formulário
+    $lastFmUser = $_POST['lastFmUser'] ?? 'Usuário não informado';
+    $selectedYear = $_POST['selectedYear'] ?? 'Ano não informado';
 
+    // Exibe as informações ou faça o que for necessário com os dados
+    echo "<h1>Dados Recebidos</h1>";
+    echo "<h1 id='lastfmuser'>" . htmlspecialchars($lastFmUser) . "</h1>" ;
+    echo "<br>";
+    echo "<h1 id='yearSelect'>" . htmlspecialchars($selectedYear) . "</h1>" ;
 
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página 2</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-    <link rel="stylesheet" href="style.css">
-
+    <title>Top Albums 2024</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
-    <h1 id="myTopAlbums"></h1>
 
-    <div>
-        <progress id="progressBar" value="0" max="100" style="width: 100%; display: none;"></progress>
-        <span id="progressText"></span>
-    </div>
     <div id="content">
         <div class="grid-container">
+            <!-- Month boxes -->
             <div class="month-box" data-month="1"><span>January</span></div>
             <div class="month-box" data-month="2"><span>February</span></div>
             <div class="month-box" data-month="3"><span>March</span></div>
@@ -50,7 +41,10 @@ if (isset($_POST['lastfmuser']) && isset($_POST['year'])) {
             <div class="month-box" data-month="12"><span>December</span></div>
         </div>
     </div>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
-    <script src="back.js"></script>
+
+    <script src="../library/html2canvas.min.js"></script>
+    <script src="../library/jquery-3.7.1.min.js"></script>
+    <script src="../js/app.js"></script>
 </body>
+
 </html>
